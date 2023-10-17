@@ -1,10 +1,12 @@
 # Standard library imports
-import os  # Operating system related functionalities
+import os  # Operating system-related functionalities
 import yaml  # YAML data parsing
 import json  # JSON data handling
 import joblib  # Job serialization (typically used for saving/loading machine learning models)
 from pathlib import Path  # Working with file paths
-from typing import Any,  List, Optional  # Type hints
+from typing import Any, List, Optional  # Type hints
+import numpy as np
+from PIL import Image
 
 # Third-party library imports
 from box.exceptions import BoxValueError  # BoxValueError exception from the box.exceptions module
@@ -95,3 +97,138 @@ def load_json(path: Path) -> ConfigBox:
 
     logger.info(f"JSON file loaded successfully from: {path}")
     return ConfigBox(content)
+
+@ensure_annotations
+def save_bin(data: Any, path: Path):
+    """
+    Save binary data to a file using Joblib.
+
+    Args:
+        data (Any): Data to be saved as binary.
+        path (Path): Path to the binary file.
+    """
+    joblib.dump(value=data, filename=path)
+    logger.info(f"Binary file saved at: {path}")
+
+
+@ensure_annotations
+def load_bin(path: Path) -> Any:
+    """
+    Load binary data from a file using Joblib.
+
+    Args:
+        path (Path): Path to the binary file.
+
+    Returns:
+        Any: Object stored in the file.
+    """
+    data = joblib.load(path)
+    logger.info(f"Binary file loaded from: {path}")
+    return data
+
+
+@ensure_annotations
+def get_size(path: Path) -> str:
+    """
+    Get the size of a file in kilobytes (KB).
+
+    Args:
+        path (Path): Path of the file.
+
+    Returns:
+        str: Size in kilobytes (KB) as a string.
+    """
+    size_in_kb = round(os.path.getsize(path) / 1024)
+    return f"~ {size_in_kb} KB"
+
+
+def decodeImage(imgstring: str, fileName: str) -> None:
+    """
+    Decode a base64-encoded image string and save it to a file.
+
+    Args:
+        imgstring (str): Base64-encoded image string.
+        fileName (str): Name of the file to save the decoded image.
+    """
+    imgdata = base64.b64decode(imgstring)
+    with open(fileName, 'wb') as f:
+        f.write(imgdata)
+
+def encodeImageIntoBase64(croppedImagePath: str) -> Optional[str]:
+    """
+    Encode an image from a file into base64 format.
+
+    Args:
+        croppedImagePath (str): Path to the image file.
+
+    Returns:
+        Optional[str]: Base64-encoded image as a string or None if the file doesn't exist.
+    """
+    try:
+        with open(croppedImagePath, "rb") as f:
+            return base64.b64encode(f.read()).decode('utf-8')
+    except FileNotFoundError:
+        return None
+
+
+@ensure_annotations
+def load_image(path: str, target_size: Tuple[int, int] = (224, 224)) -> np.ndarray:
+    """
+    Load and resize an image from a file.
+
+    Args:
+        path (str): Path to the image file.
+        target_size (Tuple[int, int]): The target size to which the image should be resized.
+
+    Returns:
+        np.ndarray: The image as a NumPy array.
+    """
+    image = Image.open(path)
+    image = image.resize(target_size)
+    return np.array(image)
+
+@ensure_annotations
+def batch_load_images(image_paths: List[str], target_size: Tuple[int, int] = (224, 224)) -> np.ndarray:
+    """
+    Load a batch of images.
+
+    Args:
+        image_paths (List[str]): List of paths to image files.
+        target_size (Tuple[int, int]): The target size for the images.
+
+    Returns:
+        np.ndarray: An array of loaded images.
+    """
+    images = [load_image(path, target_size) for path in image_paths]
+    return np.array(images)
+
+@ensure_annotations
+def one_hot_encode(labels: List[int], num_classes: int) -> np.ndarray:
+    """
+    One-hot encode a list of class labels.
+
+    Args:
+        labels (List[int]): List of class labels.
+        num_classes (int): Number of unique classes.
+
+    Returns:
+        np.ndarray: One-hot encoded labels.
+    """
+    return np.eye(num_classes)[labels]
+
+@ensure_annotations
+def split_dataset(dataset: List, split_ratio: float = 0.8) -> Tuple[List, List]:
+    """
+    Split a dataset into training and validation sets.
+
+    Args:
+        dataset (List): List of data points.
+        split_ratio (float): Ratio of the dataset to be used for training.
+
+    Returns:
+        Tuple: Two lists - (training_data, validation_data).
+    """
+    split_index = int(len(dataset) * split_ratio)
+    training_data = dataset[:split_index]
+    validation_data = dataset[split_index:]
+    return training_data, validation_data
