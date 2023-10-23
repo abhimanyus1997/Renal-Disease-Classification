@@ -70,8 +70,6 @@ Set up workflows for managing development and deployment tasks.
 
 1. If your project includes a web application, update `app.py` to reflect changes in configuration and components.
 
-Remember to document these changes in your project's documentation for reference.
-
 ---
 
 **LICENSE**
