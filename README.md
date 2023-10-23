@@ -1,8 +1,8 @@
-# **Renal Disease Classification**
+# Renal Disease Classification
 
 ## Introduction
 
-This submodule, "Renal Disease Classification," is a part of the larger "[MedicalAIProjects](https://github.com/abhimanyus1997/MedicalAIProjects)" repository. It focuses on the classification of renal diseases using machine learning and artificial intelligence techniques.
+This submodule, "Renal Disease Classification," is a part of the larger [MedicalAIProjects](https://github.com/abhimanyus1997/MedicalAIProjects) repository. It focuses on the classification of renal diseases using machine learning and artificial intelligence techniques.
 
 ## Repository Contents
 
@@ -18,14 +18,13 @@ This submodule contains the following components:
 
 To use this submodule in your own project or to contribute to its development, you can follow these steps:
 
-1. Clone the parent repository "[MedicalAIProjects](https://github.com/abhimanyus1997/MedicalAIProjects)" to your local machine.
+1. Clone the parent repository [MedicalAIProjects](https://github.com/abhimanyus1997/MedicalAIProjects) to your local machine.
 
 2. Initialize and update the submodule by running the following commands:
-
-   ```
-   git submodule init
-   git submodule update
-   ```
+```
+git submodule init
+git submodule update
+```
 
 3. Explore the contents of the "Renal Disease Classification" submodule within your local copy of the parent repository.
 
@@ -42,6 +41,36 @@ This submodule is available under the [MIT License](LICENSE), which requires pro
 ## Issues and Support
 
 If you encounter any issues or have questions related to this submodule, please open an issue on the main "MedicalAIProjects" repository.
+
+## Workflows
+
+Set up workflows for managing development and deployment tasks.
+
+### Update Configuration Files
+
+1. Update `config.yaml` with project-specific settings.
+2. Optional: Create and update `secrets.yaml` for securely managing sensitive information.
+3. Update `params.yaml` with data preprocessing and model hyperparameters.
+
+### Code Components
+
+1. Update the project's primary entity.
+2. Modify the configuration manager in the `src` directory.
+3. Update components and pipeline as necessary.
+
+### Entry Point
+
+1. Update the `main.py` file to incorporate changes in configuration, components, and pipeline.
+
+### Data Version Control
+
+1. Update the `dvc.yaml` file if using Data Version Control for data and model management.
+
+### Web Application (Optional)
+
+1. If your project includes a web application, update `app.py` to reflect changes in configuration and components.
+
+Remember to document these changes in your project's documentation for reference.
 
 ---
 
