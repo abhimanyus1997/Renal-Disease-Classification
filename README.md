@@ -8,11 +8,25 @@ This submodule, "Renal Disease Classification," is a part of the larger [Medical
 
 This submodule contains the following components:
 
-- **Data**: Information about the dataset used for training and testing the renal disease classification model.
+### Data
+Information about the dataset used for training and testing the renal disease classification model.
 
-- **Code**: The source code for the classification model, including Jupyter notebooks, Python scripts, and any relevant resources.
+ - **Dataset Information**
+   The dataset was collected from PACS (Picture archiving and communication system) from different hospitals in Dhaka, Bangladesh where patients were already diagnosed with having a kidney tumor, cyst, normal or stone findings. Both the Coronal and Axial cuts were selected from both contrast and non-contrast studies with protocol for the whole abdomen and urogram. The Dicom study was then carefully selected, one diagnosis at a time, and from those we created a batch of Dicom images of the region of interest for each radiological finding. Following that, author excluded each patient's information and meta data from the Dicom images and converted the Dicom images to a lossless jpg image format. After the conversion, each image finding was again verified by a radiologist and a medical technologist to reconfirm the correctness of the data.
 
-- **Documentation**: Additional documentation, including model evaluation results, project details, and any specific instructions for usage.
+   Author's created dataset contains 12,446 unique data within it in which the cyst contains 3,709, normal 5,077, stone 1,377, and tumor 2,283.
+
+    - **Citation**:
+   Kindly Cite if you are finding this helpful:
+
+   Islam MN, Hasan M, Hossain M, Alam M, Rabiul G, Uddin MZ, Soylu A. Vision transformer and explainable transfer learning models for auto detection of kidney cyst, stone and tumor from CT-radiography. Scientific Reports. 2022 Jul 6;12(1):1-4.
+   [Source on Kaggle](https://www.kaggle.com/datasets/nazmul0087/ct-kidney-dataset-normal-cyst-tumor-and-stone)
+
+### Code
+ The source code for the classification model, including Jupyter notebooks, Python scripts, and any relevant resources.
+
+### Documentation
+Additional documentation, including model evaluation results, project details, and any specific instructions for usage.
 
 ## How to Use
 
