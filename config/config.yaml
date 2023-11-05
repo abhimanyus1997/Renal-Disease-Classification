@@ -1,0 +1,8 @@
+project_root: project_data
+
+data_ingestion:
+  root_dir: project_data/data_ingestion
+  source_URL: https://www.kaggle.com/datasets/nazmul0087/ct-kidney-dataset-normal-cyst-tumor-and-stone
+  local_data_file: project_data/archive.zip
+  unzip_dir: project_data/data_ingestion
+
